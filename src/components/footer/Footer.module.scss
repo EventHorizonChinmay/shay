@@ -1,0 +1,13 @@
+.footer{
+    background-color:#000080; 
+    // var(--dark-blue);
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    p {
+      color: #fff;
+    }
+  }
