@@ -73,13 +73,18 @@
         width: 100%;
       }
     }
+
+    // @media screen and (max-width:566px){
+    //   // background-color: red;
+    // }
   }
   
   .grid {
     display: flex;
     justify-content: space-around;
-  
+    // background-color: 'gray';
     flex-wrap: wrap;
     padding: 1rem 0 1rem;
     background-color: #fffdf7;
   }
+

@@ -14,6 +14,7 @@ import { ADD_TO_CART, COUNT_ITEMS, DECREASE_CART, selectCartItems } from '../../
 
 const ProductDetails = () => {
   const {id}= useParams()
+  console.log(id)
   const [product, setProduct] = useState(null)
   const dispatch = useDispatch()
   const cartItem = useSelector(selectCartItems)

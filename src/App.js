@@ -52,6 +52,7 @@ function App() {
           <Route path='/market-place' element={<Products type='market-place'/>}/>
           {/* <Route path='/properties' element={<Properties/>}/> */}
           <Route path='/properties' element={<Products type='properties'/>}/>
+          <Route path='/services' element={<Products type='services'/>}/>
         
         
         </Routes>

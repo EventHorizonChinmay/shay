@@ -83,8 +83,35 @@
           // color: orangered;
         }
       }
+      .contactSeller2{
+        transition: 2s ease-in-out;
+        background-color: rgba(255,69,0,0.95);
+        margin: auto;
+        padding: 2rem;
+        // position: absolute;
+        width:21rem;
+        border-radius: 5px;
+        color: white;
+        // left: 0.5rem;
+        // top: -18rem;
+        // top: -150%;
+        z-index: 2;
+        
+        .close{
+          position: absolute;
+          left: 19rem;
+          top: 0.5rem;
+          justify-content: space-between;
+        }
+        p{
+          color:white;
+          b{
+            font-weight: 500;
+          }
+        }
+      }
       .contactSeller{transition: 2s ease-in-out;
-        background-color: rgba(255,69,0,0.85);
+        background-color: rgba(255,69,0,0.95);
         margin: auto;
         padding: 2rem;
         position: absolute;
@@ -101,6 +128,9 @@
           left: 19rem;
           top: 0.5rem;
           justify-content: space-between;
+        }
+        h4{
+          color:'white'
         }
         p{
           color:white;
@@ -193,11 +223,9 @@
         border: solid 2px rgba(255,69,0,1);
         padding: 2rem;
         margin: auto;
-
         position: absolute;
         left:0;
         transition: 2s ease-in-out;
-
         position: absolute;
         width:21rem;
         border-radius: 5px;
@@ -206,6 +234,7 @@
         // top: -18rem;
         top: -0%;
         z-index: 2;
+        
         .close{
           position: absolute;
           left: 18rem;
@@ -213,11 +242,21 @@
           justify-content: space-between;
           cursor: pointer;
         }
+        h4{
+          color:white
+        }
+        p{
+          color:white;
+          b{
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+        }
       }
       button {
         // position: absolute;
         bottom: 1rem;
-        height: 3rem;
+        min-height: 3rem;
         margin-top: 1rem;
         width: fit-content;
         left: 1rem;
@@ -229,8 +268,9 @@
     .list{
       .content{
         .contactSeller{
-          position: absolute;
-          left: -70%;
+          // position: absolute;
+          // left: -10rem;
+          z-index: 2;
           background-color:  rgba(255,69,0,0.9);
 
         }

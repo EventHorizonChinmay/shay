@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Header.module.scss'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { FaBuilding, FaRegBuilding, FaShoppingBag, FaShoppingCart, FaUserCircle} from 'react-icons/fa'
+import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
+import { FaBuilding, FaHands, FaHandsHelping, FaRegBuilding, FaShop, FaShoppingBag, FaShoppingCart, FaStore, FaUserCircle, FaWrench} from 'react-icons/fa'
+import {MdOutlineHandyman,MdHandyman} from 'react-icons/md'
+import {BiStore, BiStoreAlt} from 'react-icons/bi'
+
+import {TbHomeDollar, TbHotelService} from 'react-icons/tb'
 import {GiHamburgerMenu}  from "react-icons/gi"
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../../firebase/config'
@@ -10,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from '../../redux/slice/AuthSlice'
 import AdminOnlyRoute, { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
 import { COUNT_ITEMS, selectCartTotalQuantity } from '../../redux/slice/CartSlice'
+// import realEstate from '../../assets/real-estate.png'
 
 
 
@@ -20,21 +25,33 @@ const activeLink = ({isActive})=>(isActive && `${styles.active}`)
 
 
 const Header = () => {
-
+  const {page} = useParams()
+  console.log(page)  
   const [marketPlaceSelected, setMarketPlaceSelected] = useState('false')
   const [propertiesSelected, setPropertiesSelected] = useState('false')
+  const [servicesSelected, setServicesSelected] = useState('false')
+  
   const marketPlace =()=>{
   setMarketPlaceSelected(true)
   setPropertiesSelected(false)
-  }
+  setServicesSelected(false)
+    }
 
   const properties =()=>{
-  setPropertiesSelected(true)
-  setMarketPlaceSelected(false)
-  }
+    setPropertiesSelected(true)
+    setServicesSelected(false)    
+    setMarketPlaceSelected(false)
+    }
+  const services =()=>{
+    setServicesSelected(true)
+    setPropertiesSelected(false)
+    setMarketPlaceSelected(false)
+    }
+    
   useEffect(()=>{
     setPropertiesSelected(false)
     setMarketPlaceSelected(false)
+    setServicesSelected(false)
     // marketPlace()
     // properties()
   },[])
@@ -42,10 +59,10 @@ const Header = () => {
     <div className={styles.logo}  // 'w-full bg-red-500'  // 
     >
       
-        <div style={{width: "250px", display:'flex', justifyContent:'space-between'}}>
+        <div style={{width: "250px",backgroundColor:'',  display:'flex', justifyContent:'space-between'}}>
           <Link to='/' ><h2 
           // className='text-gray-100'
-          style={{backgroundColor:'',height:'max', padding:'5%', }} onClick={()=>{
+          style={{width:'100px',backgroundColor:'',height:'max', padding:'0%', }} onClick={()=>{
             setMarketPlaceSelected(false)
             setPropertiesSelected(false)
           }}
@@ -53,24 +70,43 @@ const Header = () => {
             <div>sh<span>ay</span>. </div></h2> 
           </Link>  
           <div>
-            <div  style={{width:'120px', display:'flex', justifyContent:'space-between', backgroundColor:''}}> 
+            <div  style={{width:'130px', display:'flex', justifyContent:'space-between'}}> 
               <Link to="/market-place" 
               style={marketPlaceSelected ? 
-              {cursor:'pointer', border:'2px solid white', boxShadow:'0px 10px 0px white', padding:'5px', borderRadius:'5px 5px 0 0 '}: 
+              {cursor:'pointer', border:'2px solid white', boxShadow:'0px 2rem 0px white', padding:'5px', borderRadius:'5px 5px 0 0 '}: 
               {cursor:'pointer', border:'0px solid white', padding:'5px', borderRadius:'5px 5px', color:'white'}} 
               onClick={()=>marketPlace()}> 
-                <FaShoppingBag size={40}   
+                {/* <FaShoppingBag  */}
+                {/* < FaStore BiStoreAlt size={30}   
+                color={marketPlaceSelected && 'rgba(255,70,1,0.9)'}
+                /> */}
+                <BiStoreAlt size={30}   
                 color={marketPlaceSelected && 'rgba(255,70,1,0.9)'}
                 /> 
               </Link>
 
               <Link to="/properties"
               style={propertiesSelected ? 
-              {cursor:'pointer', border:'2px solid white', boxShadow:'0px 10px 0px white', padding:'5px', borderRadius:'5px 5px 0 0'} : {cursor:'pointer', border:'0px solid white', padding:'5px', borderRadius:'5px', color:'white'}}
+              {cursor:'pointer', border:'2px solid white', boxShadow:'0px 2rem 0px white', padding:'5px', borderRadius:'5px 5px 0 0'} : 
+              {cursor:'pointer', border:'0px solid white', padding:'5px', borderRadius:'5px', color:'white'}}
               onClick={()=>properties()}
               > 
-                <FaBuilding size={40}  
+                <TbHomeDollar size={30}  
                 color={propertiesSelected && 'rgba(255,70,1,0.9)'}
+                />
+                {/* <img src='realEstate'  size={20}
+                alt=''
+                /> */}
+              </Link>
+
+              <Link to="/services"
+              style={servicesSelected ? 
+              {cursor:'pointer', border:'2px solid white', boxShadow:'0px 2rem 0px white', padding:'5px', borderRadius:'5px 5px 0 0'} : 
+              {cursor:'pointer', border:'0px solid white', padding:'5px', borderRadius:'5px', color:'white'}}
+              onClick={()=>services()}
+              > 
+                <MdOutlineHandyman size={30}  
+                color={servicesSelected && 'rgba(255,70,1,0.9)'}
                 />
               </Link>
             </div>
@@ -160,6 +196,7 @@ const fixedNavbar = ()=>{
 
   return (
     <header className={scrollPage ? `${styles.fixed}` : null}>
+    
       <div className={styles.header} >
         {logo}
         <nav className={showMenu? `${styles["show-nav"]}` : `${styles["hide-nav"]}`}>
@@ -178,7 +215,8 @@ const fixedNavbar = ()=>{
                 </button></Link>
               </AdminOnlyLink>
             </li>
-            <li><NavLink to='/' className={activeLink}>Home</NavLink></li>
+            
+            {/* <li><NavLink to='/' className={activeLink}>Home</NavLink></li> */}
             <li> <NavLink to='/contact' className={activeLink } >Contact Us</NavLink></li>
           </ul>
           <div className={styles["header-right"]} onClick={hideMenu}>
